@@ -25,8 +25,8 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN git config --global user.name "githubのユーザー名" \
-    && git config --global user.email "githubに登録したメールアドレス" \
+RUN git config --global user.name "soramati" \
+    && git config --global user.email "ishi.tokuri.asborake87@gmail.com" \
     && git config --global --add safe.directory /var/www/html 
     # PHP拡張モジュール（Laravelに必要で不足しているものをインストール）：pdo_mysql（PHPからMySQLへのアクセスを可能にする）、bcmath
 
