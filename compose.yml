@@ -4,7 +4,7 @@ volumes: # データを永続保存するためにdocker volumeを設定
 services:
   # phpの設定
   app: # サービス名（≠コンテナ名）を指定
-    container_name: app # コンテナ名を指定（別のdocker環境がある場合、そちらとコンテナ名が被らないように注意）
+    container_name: Creators_app # コンテナ名を指定（別のdocker環境がある場合、そちらとコンテナ名が被らないように注意）
     build: # ビルドするDockerfileの設定
       context: . # docker buildコマンドを実行する場所を指定（基本ルートディレクトリを指定しておけば良い（*2））
       dockerfile: ./docker/php/Dockerfile # Dockerfileがあるパスを指定
@@ -21,7 +21,7 @@ services:
 
   # nginxの設定
   web:
-    container_name: nginx
+    container_name: Creators_nginx
     build:
       context: .
       dockerfile: ./docker/nginx/Dockerfile
@@ -34,7 +34,7 @@ services:
   
   # mysqlの設定
   db:
-    container_name: mysql
+    container_name: Creators_mysql
     build:
       context: .
       dockerfile: ./docker/mysql/Dockerfile
