@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Goal;
-use Illuminate\Http\Request;
+use App\Http\Requests\GoalRequest;
 
 class GoalController extends Controller
 {
@@ -28,7 +28,7 @@ class GoalController extends Controller
         return view('goals.create');
     }
 
-    public function store(Request $request, Goal $goal)
+    public function store(GoalRequest $request, Goal $goal)
     {
         $input = $request['goal'];
         $goal->fill($input)->save();

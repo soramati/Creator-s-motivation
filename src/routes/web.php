@@ -14,6 +14,6 @@ use App\Http\Controllers\GoalController;
 */
 Route::get('/goals/create', [GoalController::class, 'create']);
 Route::post('/goals', [GoalController::class, 'store']);
-Route::get('/goal/{goal}', [GoalController::class ,'show']);
+Route::get('/goals/{goal}', [GoalController::class ,'show']);
 Route::get('/', [GoalController::class, 'index']);
 

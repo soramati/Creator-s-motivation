@@ -20,7 +20,7 @@ class Goal extends Model
         'goals_is_achieved',
         'goals_percent',
         'goals_is_set',
-        'goals_id',
+        'users_id',
         'goals_user_id',
     ];
 

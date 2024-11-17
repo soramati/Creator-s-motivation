@@ -14,10 +14,6 @@
                 <div class='goal'>
                     <h2 class='title'>{{ $goal->goals_name }}</h2>
                     <p class='body'>{{ $goal->goals_reward }}</p>
-                    <h2 class='title'>
-                         <a href="/goal/{{ $goal->id }}">{{ $goal->goals_name }}</a>
-                    </h2>
-                
                 </div>
             @endforeach
         </div>
