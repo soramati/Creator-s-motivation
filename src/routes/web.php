@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TaskController;   
+use App\Http\Controllers\GoalController;   
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +12,8 @@ use App\Http\Controllers\TaskController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', [TaskController::class, 'index']);
+Route::get('/goals/create', [GoalController::class, 'create']);
+Route::post('/goals', [GoalController::class, 'store']);
+Route::get('/goal/{goal}', [GoalController::class ,'show']);
+Route::get('/', [GoalController::class, 'index']);
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="ja">
     <head>
         <meta charset="utf-8">
         <title>Blog</title>
@@ -8,11 +8,16 @@
     </head>
     <body>
         <h1>Blog Name</h1>
-        <div class='tasks'>
-            @foreach ($tasks as $task)
-                <div class='task'>
-                    <h2 class='title'>{{ $task->title }}</h2>
-                    <p class='body'>{{ $task->body }}</p>
+        <a href='/goals/create'>create</a>
+        <div class='goals'>
+            @foreach ($goals as $goal)
+                <div class='goal'>
+                    <h2 class='title'>{{ $goal->goals_name }}</h2>
+                    <p class='body'>{{ $goal->goals_reward }}</p>
+                    <h2 class='title'>
+                         <a href="/goal/{{ $goal->id }}">{{ $goal->goals_name }}</a>
+                    </h2>
+                
                 </div>
             @endforeach
         </div>
