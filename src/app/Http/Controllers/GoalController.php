@@ -34,4 +34,23 @@ class GoalController extends Controller
         $goal->fill($input)->save();
         return redirect('/goals/' . $goal->id);
     }
+
+    public function edit(Goal $goal)
+{
+    return view('goals.edit')->with(['goal' => $goal]);
+}
+public function update(GoalRequest $request, Goal $goal)
+{
+    $input_goal = $request['goal'];
+    $goal->fill($input_goal)->save();
+
+    return redirect('/goals/' . $goal->id);
+}
+
+public function delete(Goal $goal)
+{
+    $goal->delete();
+    return redirect('/');
+}
+
 }
