@@ -1,23 +1,52 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GoalController;   
+use Inertia\Inertia;
+use App\Http\Controllers\GoalController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/goals/{goal}/edit', [GoalController::class, 'edit']);
-Route::delete('/goals/{goal}', [GoalController::class,'delete']);
-Route::put('/goals/{goal}', [GoalController::class, 'update']);
 
-Route::get('/goals/create', [GoalController::class, 'create']);
-Route::post('/goals', [GoalController::class, 'store']);
-Route::get('/goals/{goal}', [GoalController::class ,'show']);
-Route::get('/', [GoalController::class, 'index']);
+Route::controller(GoalController::class)->middleware(['auth'])->group(function(){
+    Route::get('/', 'index')->name('index');
+    Route::post('/goals', 'store')->name('store');
+    Route::get('/goals/create', 'create')->name('create');
+    Route::get('/goals/{goal}', 'show')->name('show');
+    Route::put('/goals/{goal}', 'update')->name('update');
+    Route::delete('/goals/{goal}', 'delete')->name('delete');
+    Route::get('/goals/{goal}/edit', 'edit')->name('edit');
+});
 
+Route::get('/welcome', function () {
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
+
+
+
+Route::get('/index', [GoalController::class, 'index'])->name('index');
+
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';

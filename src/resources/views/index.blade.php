@@ -8,6 +8,7 @@
  
 
     </head>
+    
     <body>
         <h1>Blog Name</h1>
         <a href='/goals/create'>create</a>
