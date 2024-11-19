@@ -5,9 +5,7 @@
         <title>Blog</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
- 
-
-    </head>
+     </head>
     
     <body>
         <h1>Blog Name</h1>
@@ -21,7 +19,7 @@
                 <p class='title'>
                     <a href="/goals/{{ $goal->id }}">{{ $goal->updated_at }}</a>
                 </p>
-                <small>{{ $goal->user->name}}作</small>
+                <small>ユーザー名：{{ $goal->user->name}}</small>
                 <form action="/goals/{{ $goal->id }}" id="form_{{ $goal->id }}" method="POST">
                     @csrf
                     @method('DELETE')

@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\User;
+
 class Goal extends Model
 {
     use SoftDeletes;
@@ -29,9 +31,12 @@ class Goal extends Model
         return $this->belongsTo(User::class);
     }
     
-    function getPaginateByLimit(int $limit_count = 5)
+    public function getPaginateByLimit(int $limit_count = 10)
     {
-        return $this::with('user')->orderBy('updated_at', 'DESC')->paginate($limit_count);
+           // updated_atで降順に並べたあと、limitで件数制限をかける
+    // return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
+    return $this::with('user_id')->orderBy('updated_at', 'DESC')->paginate($limit_count);
+
     }
 
 }
