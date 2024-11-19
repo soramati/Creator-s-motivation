@@ -43,7 +43,7 @@ class GoalController extends Controller
 public function update(GoalRequest $request, Goal $goal)
 {
     $input_goal = $request['goal'];
-    $input_goal += ['user_id' => $request->user()->id];    //この行を追加
+    $input_goal += ['user_id' => $request->user()->id];   
     $goal->fill($input_goal)->save();
     return redirect('/goals/' . $goal->id);
 }
