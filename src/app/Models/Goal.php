@@ -21,13 +21,17 @@ class Goal extends Model
         'goals_is_achieved',
         'goals_percent',
         'goals_is_set',
-        'users_id',
+        'user_id',
         'goals_user_id',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
+    function getPaginateByLimit(int $limit_count = 5)
+    {
+        return $this::with('user')->orderBy('updated_at', 'DESC')->paginate($limit_count);
+    }
 
-    public function getPaginateByLimit(int $limit_count = 3)
-{
-    // updated_atで降順に並べたあと、limitで件数制限をかける
-    return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
-}
 }

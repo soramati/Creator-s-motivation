@@ -21,6 +21,7 @@
                 <p class='title'>
                     <a href="/goals/{{ $goal->id }}">{{ $goal->updated_at }}</a>
                 </p>
+                <small>{{ $goal->user->name}}作</small>
                 <form action="/goals/{{ $goal->id }}" id="form_{{ $goal->id }}" method="POST">
                     @csrf
                     @method('DELETE')

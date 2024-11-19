@@ -15,7 +15,7 @@ class GoalController extends Controller
     /**
      * 特定IDのpostを表示する
      *
-     * @params Object Post // 引数の$postはid=1のPostインスタンス
+     * @params Object Post // 引数の$goalはid=1のPostインスタンス
      * @return Reposnse post view
      */
     public function show(Goal $goal)
@@ -31,6 +31,7 @@ class GoalController extends Controller
     public function store(GoalRequest $request, Goal $goal)
     {
         $input = $request['goal'];
+        $input += ['user_id' => $request->user()->id];
         $goal->fill($input)->save();
         return redirect('/goals/' . $goal->id);
     }
@@ -42,8 +43,8 @@ class GoalController extends Controller
 public function update(GoalRequest $request, Goal $goal)
 {
     $input_goal = $request['goal'];
+    $input_goal += ['user_id' => $request->user()->id];    //この行を追加
     $goal->fill($input_goal)->save();
-
     return redirect('/goals/' . $goal->id);
 }
 
