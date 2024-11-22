@@ -18,12 +18,14 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/dashboard', [UserController::class, 'index']);
 
-Route::controller(GoalController::class)->middleware(['auth'])->group(function(){
+Route::controller(GoalController::class)->middleware(['auth'])->group(function () {
     Route::get('/', 'index')->name('index');
     Route::post('/goals', 'store')->name('store');
     Route::get('/goals/create', 'create')->name('create');
+    Route::patch('/goals/done/{goal}', 'done')->name('done');
     Route::get('/goals/{goal}', 'show')->name('show');
     Route::put('/goals/{goal}', 'update')->name('update');
     Route::delete('/goals/{goal}', 'delete')->name('delete');
@@ -53,4 +55,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

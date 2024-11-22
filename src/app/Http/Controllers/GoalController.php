@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Goal;
 use App\Http\Requests\GoalRequest;
 
@@ -9,7 +10,7 @@ class GoalController extends Controller
     public function index(Goal $goal)
     {
         return view('index')->with(['goals' => $goal->getPaginateByLimit()]);
-    }     
+    }
 
 
     /**
@@ -38,24 +39,28 @@ class GoalController extends Controller
     }
 
     public function edit(Goal $goal)
-{
-    echo "Hello";
-    return view('goals.edit')->with(['goal' => $goal]);
-}
-public function update(GoalRequest $request, Goal $goal)
-{
+    {
+        echo "Hello";
+        return view('goals.edit')->with(['goal' => $goal]);
+    }
+    public function update(GoalRequest $request, Goal $goal)
+    {
 
-    echo "update";
-    $input_goal = $request['goal'];
-    $input_goal += ['user_id' => $request->user()->id];   
-    $goal->fill($input_goal)->save();
-    return redirect('/goals/' . $goal->id);
-}
-
-public function delete(Goal $goal)
-{
-    $goal->delete();
-    return redirect('/dashboard');
-}
-
+        echo "update";
+        $input_goal = $request['goal'];
+        $input_goal += ['user_id' => $request->user()->id];
+        $goal->fill($input_goal)->save();
+        return redirect('/goals/' . $goal->id);
+    }
+    public function done(Goal $goal)
+    {
+        $goal->goals_is_achieved = true;
+        $goal->save();
+        return redirect('/dashboard');
+    }
+    public function delete(Goal $goal)
+    {
+        $goal->delete();
+        return redirect('/dashboard');
+    }
 }
