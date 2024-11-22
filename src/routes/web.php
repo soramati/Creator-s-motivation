@@ -5,6 +5,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\GoalController;
+use App\Http\Controllers\UserController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +18,7 @@ use App\Http\Controllers\GoalController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/dashboard', [UserController::class, 'index']);
 
 Route::controller(GoalController::class)->middleware(['auth'])->group(function(){
     Route::get('/', 'index')->name('index');
@@ -39,7 +43,7 @@ Route::get('/welcome', function () {
 
 Route::get('/index', [GoalController::class, 'index'])->name('index');
 
-Route::get('/dashboard', function () {
+Route::get('/dashboards', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 

@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Goal;
+use Illuminate\Support\Facades\Auth; 
 
 class User extends Authenticatable
 {
@@ -47,5 +48,10 @@ class User extends Authenticatable
     public function goals()   
 {
     return $this->hasMany(Goal::class);  
+}
+
+public function getOwnPaginateByLimit(int $limit_count = 5)
+{
+    return $this::with('goals')->find(Auth::id())->goals()->orderBy('updated_at', 'DESC')->paginate($limit_count);
 }
 }

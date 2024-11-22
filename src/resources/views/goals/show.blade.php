@@ -19,7 +19,7 @@
         </div>
         <div class="footer">
         <div class="edit"><a href="/goals/{{ $goal->id }}/edit">edit</a></div>
-            <a href="/">戻る</a>
+            <a href="/dashboard">戻る</a>
         </div>
     </body>
 </html>

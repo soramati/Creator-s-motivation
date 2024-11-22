@@ -25,6 +25,7 @@ class GoalController extends Controller
     }
     public function create()
     {
+        echo "Hello";
         return view('goals.create');
     }
 
@@ -38,10 +39,13 @@ class GoalController extends Controller
 
     public function edit(Goal $goal)
 {
+    echo "Hello";
     return view('goals.edit')->with(['goal' => $goal]);
 }
 public function update(GoalRequest $request, Goal $goal)
 {
+
+    echo "update";
     $input_goal = $request['goal'];
     $input_goal += ['user_id' => $request->user()->id];   
     $goal->fill($input_goal)->save();
@@ -51,7 +55,7 @@ public function update(GoalRequest $request, Goal $goal)
 public function delete(Goal $goal)
 {
     $goal->delete();
-    return redirect('/');
+    return redirect('/dashboard');
 }
 
 }

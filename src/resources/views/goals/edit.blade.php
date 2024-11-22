@@ -11,7 +11,7 @@
 <body>
     <h1 class="goals_name">編集画面</h1>
     <div class="content">
-        <form action="/goals/{{ $goal->id }}" method="goal">
+        <form action="/goals/{{ $goal->id }}" method="POST">
             @csrf
             @method('PUT')
             <div class='content__goals_name'>
@@ -23,7 +23,7 @@
                 <input type='text' name='goal[goals_reward]' value="{{ $goal->goals_reward }}">
             </div>
             <input type="submit" value="保存">
-            <a href="/">戻る</a>
+            <a href="/dashboard">戻る</a>
         </form>
     </div>
 
