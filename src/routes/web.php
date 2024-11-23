@@ -26,6 +26,7 @@ Route::controller(GoalController::class)->middleware(['auth'])->group(function (
     Route::post('/goals', 'store')->name('store');
     Route::get('/goals/create', 'create')->name('create');
     Route::patch('/goals/done/{goal}', 'done')->name('done');
+    Route::patch('/goals/set/{goal}', 'set')->name('set');
     Route::get('/goals/{goal}', 'show')->name('show');
     Route::put('/goals/{goal}', 'update')->name('update');
     Route::delete('/goals/{goal}', 'delete')->name('delete');

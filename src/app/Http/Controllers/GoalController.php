@@ -9,7 +9,9 @@ class GoalController extends Controller
 {
     public function index(Goal $goal)
     {
-        return view('index')->with(['goals' => $goal->getPaginateByLimit()]);
+        return view('index')->with(
+            ['goals' => $goal->getPaginateByLimit()]
+        );
     }
 
 
@@ -26,7 +28,7 @@ class GoalController extends Controller
     }
     public function create()
     {
-        echo "Hello";
+
         return view('goals.create');
     }
 
@@ -40,13 +42,10 @@ class GoalController extends Controller
 
     public function edit(Goal $goal)
     {
-        echo "Hello";
         return view('goals.edit')->with(['goal' => $goal]);
     }
     public function update(GoalRequest $request, Goal $goal)
     {
-
-        echo "update";
         $input_goal = $request['goal'];
         $input_goal += ['user_id' => $request->user()->id];
         $goal->fill($input_goal)->save();
@@ -54,7 +53,14 @@ class GoalController extends Controller
     }
     public function done(Goal $goal)
     {
-        $goal->goals_is_achieved = true;
+        $goal->goals_is_achieved = 1 - $goal->goals_is_achieved;
+        $goal->save();
+        return redirect('/dashboard');
+    }
+
+    public function set(Goal $goal)
+    {
+        $goal->goals_is_set = 1 - $goal->goals_is_set;
         $goal->save();
         return redirect('/dashboard');
     }
