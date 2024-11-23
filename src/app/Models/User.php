@@ -57,12 +57,18 @@ class User extends Authenticatable
 
     public function getSetPaginateByLimit()
     {
+
+
         $set_goal = $this::with('goals')->find(Auth::id())->goals()->orderBy('updated_at', 'DESC')->where('goals_is_set', true)->first();
-        if ($set_goal === null) {
-            $set_goal = new Goal();
-            $set_goal->goals_name = '目標が設定されていません';
-        }
 
         return $set_goal;
+    }
+    public function resetGoalsSet()
+    {
+        $old_goal = $this::with('goals')->find(Auth::id())->goals()->orderBy('updated_at', 'DESC')->where('goals_is_set', true);
+        foreach ($old_goal as $goal) {
+            $goal->goals_is_set = false;
+            $goal->save();
+        }
     }
 }

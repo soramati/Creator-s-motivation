@@ -12,7 +12,14 @@ class UserController extends Controller
     public function index(User $user)
     {
         return view('Users.index')->with([
-            'own_posts' => $user->getOwnPaginateByLimit()
+            'own_posts' => $user->getOwnPaginateByLimit(),
+            'set_goal' => $user->getSetPaginateByLimit()
         ]);
+    }
+    public function reset(User $user)
+    {
+        $user->resetGoalsSet();
+
+        return redirect('/dashboard');
     }
 }

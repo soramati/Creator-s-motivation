@@ -19,10 +19,13 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/dashboard', [UserController::class, 'index']);
+Route::controller(UserController::class)->middleware(['auth'])->group(function () {
+    Route::get('/dashboard', 'index')->name('index');
+});
 
 Route::controller(GoalController::class)->middleware(['auth'])->group(function () {
     Route::get('/', 'index')->name('index');
+    Route::patch('/goals/reset', 'resetGoalsSet')->name('resetGoalsSet');
     Route::post('/goals', 'store')->name('store');
     Route::get('/goals/create', 'create')->name('create');
     Route::patch('/goals/done/{goal}', 'done')->name('done');
@@ -33,7 +36,7 @@ Route::controller(GoalController::class)->middleware(['auth'])->group(function (
     Route::get('/goals/{goal}/edit', 'edit')->name('edit');
 });
 
-Route::get('/welcome', function () {
+Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),

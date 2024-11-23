@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Goal;
 use App\Http\Requests\GoalRequest;
+use Illuminate\Support\Facades\Auth;
 
 class GoalController extends Controller
 {
@@ -28,7 +30,6 @@ class GoalController extends Controller
     }
     public function create()
     {
-
         return view('goals.create');
     }
 
@@ -39,7 +40,6 @@ class GoalController extends Controller
         $goal->fill($input)->save();
         return redirect('/goals/' . $goal->id);
     }
-
     public function edit(Goal $goal)
     {
         return view('goals.edit')->with(['goal' => $goal]);
@@ -60,13 +60,21 @@ class GoalController extends Controller
 
     public function set(Goal $goal)
     {
+        //既存のgoalのgoals_is_setを0にする
+        Goal::where('user_id', Auth::id())->update(['goals_is_set' => 0]);
+        //選択されたgoalのgoals_is_setを1にする
         $goal->goals_is_set = 1 - $goal->goals_is_set;
         $goal->save();
         return redirect('/dashboard');
     }
+
     public function delete(Goal $goal)
     {
         $goal->delete();
+        return redirect('/dashboard');
+    }
+    public function resetGoalsSet(Goal $goal)
+    {
         return redirect('/dashboard');
     }
 }
