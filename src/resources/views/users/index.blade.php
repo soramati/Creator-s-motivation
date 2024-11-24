@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>goals</title>
     <!-- Fonts -->
-    @vite('resources/css/app.css')
+    
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 </head>
 <div class="top center">
@@ -146,10 +146,7 @@
         justify-content: center;
     }
 
-    .top {
-        display: flex;
-        justify-content: center;
-    }
+
 
     .col {
         display: flex;

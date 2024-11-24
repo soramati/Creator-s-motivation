@@ -6,16 +6,19 @@
     <title>Blog</title>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    @vite('resources/js/app.js')
 </head>
 
-<body>
-    <h1 class="title">goals</h1>
-    <a href="/admin">admin</a>
-    <a href="/login">Login</a>
+</head>
 
 
+<div id="vue-app">
+    <admin-page> </admin-page>
+</div>
+<h1 class="title">goals</h1>
+<a href="/admin">admin</a>
+<a href="/login">Login</a>
 
-</body>
 <script>
     function deleteGoal(id) {
         'use strict'
