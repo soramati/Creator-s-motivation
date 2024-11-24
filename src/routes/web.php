@@ -19,12 +19,15 @@ use App\Http\Controllers\UserController;
 |
 */
 
+
 Route::controller(UserController::class)->middleware(['auth'])->group(function () {
     Route::get('/dashboard', 'index')->name('index');
+    Route::get('/admin', 'admin')->name('admin');
 });
 
 Route::controller(GoalController::class)->middleware(['auth'])->group(function () {
     Route::get('/', 'index')->name('index');
+
     Route::patch('/goals/reset', 'resetGoalsSet')->name('resetGoalsSet');
     Route::post('/goals', 'store')->name('store');
     Route::get('/goals/create', 'create')->name('create');
@@ -45,7 +48,11 @@ Route::get('/', function () {
     ]);
 });
 
-
+Route::get('/admin', function () {
+    echo "admin";
+    return Inertia::render('Admin');
+})->middleware(['auth', 'verified'])->name('Admin');
+Route::get('/admin', [App\Http\Controllers\UserController::class, 'admin'])->name('admin');
 
 Route::get('/index', [GoalController::class, 'index'])->name('index');
 

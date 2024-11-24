@@ -9,25 +9,9 @@
 </head>
 
 <body>
-    <h1>Blog Name</h1>
-    <a href='/goals/create'>create</a>
-    <div class='goals'>
-        @foreach ($goals as $goal)
-        <div class='goal'>
-            <h2 class='title'>{{ $goal->goals_name }}</h2>
-            <p class='body'>{{ $goal->goals_reward }}</p>
-        </div>
-        <p class='title'>
-            <a href="/goals/{{ $goal->id }}">{{ $goal->updated_at }}</a>
-        </p>
-        <small>ユーザー名：{{ $goal->user->name}}</small>
-        <form action="/goals/{{ $goal->id }}" id="form_{{ $goal->id }}" method="POST">
-            @csrf
-            @method('DELETE')
-            <button type="button" onclick="deleteGoal({{ $goal->id }})">delete</button>
-        </form>
-        @endforeach
-    </div>
+    <h1 class="title">goals</h1>
+    <a href="/admin">admin</a>
+    <a href="/login">Login</a>
 
 
 
