@@ -1,5 +1,3 @@
-
-
 <template>
       <p>adminです</p>
 </template>

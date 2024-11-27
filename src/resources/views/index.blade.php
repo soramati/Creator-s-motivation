@@ -12,7 +12,7 @@
 </head>
 
 
-<div id="vue-app">
+<div id="custom-app">
     <admin-page> </admin-page>
 </div>
 <h1 class="title">goals</h1>
