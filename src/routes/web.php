@@ -21,13 +21,14 @@ use App\Http\Controllers\UserController;
 
 
 Route::controller(UserController::class)->middleware(['auth'])->group(function () {
-    Route::get('/dashboard', 'index')->name('index');
-    Route::get('/admin', 'admin')->name('admin');
+    Route::get('/', 'index')->name('index');
+    // Route::get('/admin', 'admin')->name('admin');
 });
 
-Route::controller(GoalController::class)->middleware(['auth'])->group(function () {
-    Route::get('/', 'index')->name('index');
+Route::get('/admin', [UserController::class, 'admin'])->middleware(['auth', 'admin'])->name('admin');
 
+Route::controller(GoalController::class)->middleware(['auth'])->group(function () {
+    // Route::get('/', 'index')->name('index');
     Route::patch('/goals/reset', 'resetGoalsSet')->name('resetGoalsSet');
     Route::post('/goals', 'store')->name('store');
     Route::get('/goals/create', 'create')->name('create');
@@ -39,7 +40,7 @@ Route::controller(GoalController::class)->middleware(['auth'])->group(function (
     Route::get('/goals/{goal}/edit', 'edit')->name('edit');
 });
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
 
     // return view('index');
     return Inertia::render('Welcome', [
@@ -56,7 +57,7 @@ Route::get('/admin', function () {
 })->middleware(['auth', 'verified'])->name('Admin');
 Route::get('/admin', [App\Http\Controllers\UserController::class, 'admin'])->name('admin');
 
-Route::get('/index', [GoalController::class, 'index'])->name('index');
+// Route::get('/', [GoalController::class, 'index'])->name('index');
 
 Route::get('/dashboards', function () {
     return Inertia::render('Dashboard');
@@ -67,5 +68,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 require __DIR__ . '/auth.php';

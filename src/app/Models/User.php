@@ -45,6 +45,10 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function index()
+    {
+        return view('users/index');
+    }
     public function goals()
     {
         return $this->hasMany(Goal::class);
